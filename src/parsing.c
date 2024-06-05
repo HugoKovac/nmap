@@ -18,11 +18,6 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
     }
     while (ptr)
     {
-        /* TODO
-            If enter in if remove flag (and arg) from av
-            Move the else outside of the loop to handle all arg not taken into account
-        */
-
         for (int i = 1; i < len; i++)
         {
             if (!av[i])
@@ -31,10 +26,7 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
             }
             else if (strstr(av[i], "--") && !strcmp(av[i] + 2, ptr->symbol)) // --arg
             {
-                puts("DOUBLE");
-
-                // if (!double_parsing_check(ptr, &i, av))
-                //     return NULL;
+                // puts("DOUBLE");
                 if (!arg_check(ptr, i, av))
                     return NULL;
             }
@@ -42,7 +34,7 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
                      strlen(av[i]) == 2 &&
                      !strcmp(av[i] + 1, ptr->symbol)) // -a
             {
-                puts("SIMPLE");
+                // puts("SIMPLE");
                 if (!arg_check(ptr, i, av))
                     return NULL;
             }
@@ -52,7 +44,7 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
                       (isupper(av[i][1]) && isdigit(av[i][2]))) && // T5
                      !strcmp(av[i] + 1, ptr->symbol))
             {
-                puts("NMAP");
+                // puts("NMAP");
                 if (!arg_check(ptr, i, av))
                     return NULL;
             }
@@ -63,14 +55,12 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
     {
         if (av[i])
         {
-            printf("remains: %s\n", av[i]);
+            // printf("remains: %s\n", av[i]);
             // print("2nd check ptr = %p\n", )
             s_input *cpy = options;
             while (cpy->next)
             {
                 cpy = cpy->next;
-                printf("%p\n", cpy);
-                printf("%p\n", cpy->next);
             }
             // Create a new node ?
             cpy->next = &(s_input){
@@ -81,7 +71,7 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
                 false,
                 true,
                 NULL};
-            printf(">> %s -> %p (%s)\n", cpy->symbol, cpy->next, av[i]);
+            // printf(">> %s -> %p (%s)\n", cpy->symbol, cpy->next, av[i]);
             cpy = options;
             // while (cpy)
             // {

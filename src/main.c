@@ -44,7 +44,7 @@ int main(int ac, char **av)
 
     if (!parsing(ac, av, "default", &o_oui))
     {
-        dprintf(2, "ERROR\n");
+        // dprintf(2, "ERROR\n");
         return 255;
     }
 
