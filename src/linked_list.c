@@ -11,7 +11,7 @@ void freeList(s_input *head)
     }
 }
 
-void add_back(s_input **head, e_type type, char *symbol, bool argument, bool unique)
+void add_back(s_input **head, e_type type, char *symbol, bool argument)
 {
 
     s_input *new = NULL;
@@ -24,7 +24,7 @@ void add_back(s_input **head, e_type type, char *symbol, bool argument, bool uni
     new->symbol = symbol;
     new->data = NULL;
     new->argument = argument;
-    new->unique = unique;
+    new->next = NULL;
 
     if (!*head)
     {

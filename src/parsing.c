@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 s_input *parsing(int ac, char **av, char *default_output, s_input *options)
 {
@@ -53,33 +54,50 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
     }
     for (int i = 1; i < len; i++)
     {
+        ptr = options;
+        while (ptr->next)
+        {
+            ptr = ptr->next;
+        }
         if (av[i])
         {
             // printf("remains: %s\n", av[i]);
             // print("2nd check ptr = %p\n", )
-            s_input *cpy = options;
-            while (cpy->next)
-            {
-                cpy = cpy->next;
-                printf("%p\n", cpy->next);
-            }
+
             // Create a new node ?
-            cpy->next = &(s_input){
+            ptr->next = &(s_input){
                 NO_FLAG,
                 NULL,
                 av[i],
-                true,
                 false,
                 NULL};
-            // printf(">> %s -> %p (%s)\n", cpy->symbol, cpy->next, av[i]);
-            cpy = options;
-            // while (cpy)
-            // {
-            //     printf("%s -> %s\n", cpy->symbol, cpy->data);
-            //     cpy = cpy->next;
-            // }
+            ptr->next = malloc(sizeof(s_input));
+            if (ptr->next)
+            {
+                *(ptr->next) = (s_input){0};
+                ptr->next->type = NO_FLAG;
+                ptr->next->symbol = NULL;
+                ptr->next->data = av[i];
+                ptr->next->argument = false;
+                ptr->next->next = NULL;
+            }
         }
+        ptr = ptr->next;
     }
+    // DEBUG VIEW LINK LIST
+     ptr = options;
+     while (ptr)
+     {
+         if (ptr->data)
+         {
+             printf("%s\n", ptr->data);
+         }
+         else
+         {
+             printf("%s: no data\n", ptr->symbol);
+         }
+         ptr = ptr->next;
+     }
 
     return options;
 }
