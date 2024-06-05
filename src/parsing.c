@@ -61,15 +61,15 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
             while (cpy->next)
             {
                 cpy = cpy->next;
+                printf("%p\n", cpy->next);
             }
             // Create a new node ?
             cpy->next = &(s_input){
-                DOUBLE,
+                NO_FLAG,
                 NULL,
                 av[i],
                 true,
                 false,
-                true,
                 NULL};
             // printf(">> %s -> %p (%s)\n", cpy->symbol, cpy->next, av[i]);
             cpy = options;
