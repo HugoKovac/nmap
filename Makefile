@@ -27,8 +27,5 @@ $(OBJ):
 clean:
 	$(RM) *.o
 
-clean:
-	$(RM) *.o
-
 fclean: clean
 	$(RM) $(BIN)
