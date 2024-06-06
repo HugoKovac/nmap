@@ -67,19 +67,19 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
 		ptr = ptr->next;
 	}
 	// DEBUG VIEW LINK LIST
-	ptr = options;
-	while (ptr)
-	{
-		if (ptr->data)
-		{
-			printf("%s: %s\n", ptr->symbol, ptr->data);
-		}
-		else
-		{
-			printf("%s: no data\n", ptr->symbol);
-		}
-		ptr = ptr->next;
-	}
+	// ptr = options;
+	// while (ptr)
+	// {
+	// 	if (ptr->data)
+	// 	{
+	// 		printf("%s: %s\n", ptr->symbol, ptr->data);
+	// 	}
+	// 	else
+	// 	{
+	// 		printf("%s: no data\n", ptr->symbol);
+	// 	}
+	// 	ptr = ptr->next;
+	// }
 
 	return options;
 }

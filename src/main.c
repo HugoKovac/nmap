@@ -33,6 +33,11 @@ int main(int ac, char **av)
 		// dprintf(2, "ERROR\n");
 		return 255;
 	}
+	if (!parsed(&head))
+	{
+		freeList(head);
+		return 2;
+	}
 
 	freeList(head);
 

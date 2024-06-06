@@ -11,7 +11,7 @@ OBJS=$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 HDRS=$(wildcard $(INC)/*.h)
 
 
-BIN=nmap
+BIN=ft_nmap
 
 all:$(BIN)
 
@@ -29,3 +29,5 @@ clean:
 
 fclean: clean
 	$(RM) $(BIN)
+
+re: fclean $(BIN)

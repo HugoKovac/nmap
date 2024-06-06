@@ -28,6 +28,7 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options);
 bool arg_check(s_input *ptr, int idx, char **av);
 void add_back(s_input **head, e_type type, char *symbol, bool argument);
 void freeList(s_input *head);
+bool parsed(s_input **head);
 
 
 #endif
