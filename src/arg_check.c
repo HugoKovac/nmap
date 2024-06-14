@@ -17,9 +17,13 @@ bool arg_check(s_input *ptr, int idx, char **av)
             return false;
         }
         ptr->data = av[idx + 1];
-        av[idx + 1] = NULL;
+        av[idx + 1] = NULL; // remove the arg from av to not loop to it again
     }
-    av[idx] = NULL;
+    else
+    {
+        ptr->data = (void*)1;
+    }
+    av[idx] = NULL; // remove from av to not loop to it again
 
     return true;
 }

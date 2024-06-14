@@ -27,7 +27,6 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
 			}
 			else if (strstr(av[i], "--") && !strcmp(av[i] + 2, ptr->symbol)) // --arg
 			{
-				// puts("DOUBLE");
 				if (!arg_check(ptr, i, av))
 					return NULL;
 			}
@@ -35,7 +34,6 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
 					 strlen(av[i]) == 2 &&
 					 !strcmp(av[i] + 1, ptr->symbol)) // -a
 			{
-				// puts("SIMPLE");
 				if (!arg_check(ptr, i, av))
 					return NULL;
 			}
@@ -51,8 +49,7 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
 		}
 		if (av[i])
 		{
-			// printf("remains: %s\n", av[i]);
-			// Create a new node ?
+			// Create a new node
 			ptr->next = malloc(sizeof(s_input));
 			if (ptr->next)
 			{
@@ -66,20 +63,6 @@ s_input *parsing(int ac, char **av, char *default_output, s_input *options)
 		}
 		ptr = ptr->next;
 	}
-	// DEBUG VIEW LINK LIST
-	// ptr = options;
-	// while (ptr)
-	// {
-	// 	if (ptr->data)
-	// 	{
-	// 		printf("%s: %s\n", ptr->symbol, ptr->data);
-	// 	}
-	// 	else
-	// 	{
-	// 		printf("%s: no data\n", ptr->symbol);
-	// 	}
-	// 	ptr = ptr->next;
-	// }
 
 	return options;
 }
