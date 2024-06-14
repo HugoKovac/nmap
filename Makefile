@@ -25,7 +25,7 @@ $(OBJ):
 	mkdir -p $@
 
 clean:
-	$(RM) *.o
+	$(RM) $(OBJ)/*.o
 
 fclean: clean
 	$(RM) $(BIN)

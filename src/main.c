@@ -5,32 +5,26 @@
 int main(int ac, char **av)
 {
 	s_input *head = NULL;
+    bool alloc_error = false;
 
-	add_back(&head, DOUBLE, "help", true);
-	add_back(&head, DOUBLE, "ports", true);
-	add_back(&head, DOUBLE, "ip", true);
-	add_back(&head, DOUBLE, "speedup", true);
-	add_back(&head, DOUBLE, "scan", true);
-	add_back(&head, DOUBLE, "file", true);
+	alloc_error |= add_back(&head, DOUBLE, "help", true);
+	alloc_error |= add_back(&head, DOUBLE, "ports", true);
+	alloc_error |= add_back(&head, DOUBLE, "ip", true);
+	alloc_error |= add_back(&head, DOUBLE, "speedup", true);
+	alloc_error |= add_back(&head, DOUBLE, "scan", true);
+	alloc_error |= add_back(&head, DOUBLE, "file", true);
 
-	if (!head)
+	if (!head || alloc_error)
 	{
 		dprintf(2, "Allocation error\n");
 		return 1;
 	}
 
-	s_input *cpy = head;
-
-	while (cpy->next)
-	{
-		// printf("%p\n", cpy);
-		// printf("%s\n", cpy->symbol);
-		cpy = cpy->next;
-	}
+    // print_linked_list(head);
 
 	if (!parsing(ac, av, "default", head))
 	{
-		// dprintf(2, "ERROR\n");
+		dprintf(2, "ERROR\n");
 		return 255;
 	}
 	if (!parsed(&head))
@@ -38,6 +32,8 @@ int main(int ac, char **av)
 		freeList(head);
 		return 2;
 	}
+
+    print_linked_list(head);
 
 	freeList(head);
 
