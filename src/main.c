@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <ctype.h>
 #include "parsing.h"
 
 int main(int ac, char **av)
@@ -36,7 +35,8 @@ int main(int ac, char **av)
         freeList(head);
         return 255;
     }
-    if (arg_help(help_msg, head)){
+    if (arg_help(help_msg, head))
+    {
         freeList(head);
         return 0;
     }
@@ -44,6 +44,13 @@ int main(int ac, char **av)
     {
         freeList(head);
         return 2;
+    }
+
+    
+    if (ping(head->next->next->data))
+    {
+        freeList(head);
+        return 3;
     }
 
     // print_linked_list(head);

@@ -31,6 +31,7 @@ void freeList(s_input *head);
 bool parsed(s_input **head);
 void print_linked_list(s_input *head);
 bool arg_help(char *help_msg, s_input *help_node);
+bool ping(char *host);
 
 
 #endif
