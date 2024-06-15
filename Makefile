@@ -16,7 +16,7 @@ BIN=ft_nmap
 all:$(BIN)
 
 $(BIN): $(OBJS) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) -o $@ -pthread
 
 $(OBJ)/%.o: $(SRC)/%.c $(OBJ)
 	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
