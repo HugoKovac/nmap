@@ -9,7 +9,16 @@
 #include <pthread.h>
 #include "parsing.h"
 
-void *send_thread(void *host)
+void build_iph()
+{
+    // struct iphdr *iph = (struct iphdr *) datagram;// point to datagram
+}
+
+void build_tcph()
+{
+}
+
+struct addrinfo *resolve_hostname(char *host)
 {
     struct addrinfo hints = {0}; // Hints (rules) for resolving ip/host
     struct addrinfo *out = NULL;
@@ -20,9 +29,18 @@ void *send_thread(void *host)
     int ping_result = getaddrinfo(host, NULL, &hints, &out); // resolve hostname of IPV4
     if (ping_result)
     {
-        dprintf(2, "'%s' failed to be resolved: %s\n", (char*)host, gai_strerror(ping_result));
-        return (void*)true;
+        dprintf(2, "'%s' failed to be resolved: %s\n", (char *)host, gai_strerror(ping_result));
+        return NULL;
     }
+    return out;
+}
+
+void *send_thread(void *host)
+{
+    // char datagram[4096], source_ip[32], *data, *pseudogram;
+    struct addrinfo *out = resolve_hostname(host);
+    if (!out)
+        return (void *)true;
 
     if (out)
     {
@@ -33,7 +51,7 @@ void *send_thread(void *host)
         {
             perror("Fail to create socket");
             freeaddrinfo(out);
-            return (void*)true;
+            return (void *)true;
         }
         connect(client_fd, (const struct sockaddr *)dest_addr, out->ai_addrlen);
 
@@ -42,13 +60,13 @@ void *send_thread(void *host)
         {
             dprintf(2, "Send failed\n");
             freeaddrinfo(out);
-            return (void*)true;
+            return (void *)true;
         }
         close(client_fd);
     }
 
     freeaddrinfo(out);
-    return (void*)false;
+    return (void *)false;
 }
 
 bool ping(char *host)
